@@ -1,0 +1,19 @@
+#! /usr/bin/expect
+
+#If it all goes pear shaped the script will timeout after 20 seconds.
+set timeout 20
+#First argument is assigned to the variable name
+set ip 192.168.1.1
+#Third argument is assigned to the variable password
+set password admin
+#This spawns the telnet program and connects it to the variable name
+spawn telnet "$ip"
+#The script expects login
+expect "Password:"
+#The script sends the password variable
+send "$password\r"
+expect "ZTE>"
+send "sys reboot\r"
+expect "Command executed successfully"
+expect "ZTE>"
+send "exit"
